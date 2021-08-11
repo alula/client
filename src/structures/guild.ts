@@ -608,6 +608,7 @@ const keysGuild = new BaseSet<string>([
   DiscordKeys.RULES_CHANNEL_ID,
   DiscordKeys.SPLASH,
   DiscordKeys.STAGE_INSTANCES,
+  DiscordKeys.STICKERS,
   DiscordKeys.SYSTEM_CHANNEL_FLAGS,
   DiscordKeys.SYSTEM_CHANNEL_ID,
   DiscordKeys.THREADS,
@@ -633,6 +634,7 @@ const keysSkipDifferenceGuild = new BaseSet<string>([
   DiscordKeys.MEMBERS,
   DiscordKeys.PRESENCES,
   DiscordKeys.ROLES,
+  DiscordKeys.STICKERS,
 ]);
 
 /**
@@ -1157,6 +1159,31 @@ export class Guild extends GuildPartial {
             this.stageInstances.clear();
             for (let stage of stageInstances) {
               this.stageInstances.set(stage.id, stage);
+            }
+          }
+        }; return;
+        case DiscordKeys.STICKERS: {
+          if (this.client.stickers.enabled) {
+            const stickers: Array<Sticker> = [];
+            for (let raw of value) {
+              raw.guild_id = this.id;
+
+              let sticker: Sticker;
+              if (this.isClone) {
+                sticker = new Sticker(this.client, raw, this.isClone);
+              } else {
+                if (this.stickers.has(raw.id)) {
+                  sticker = this.stickers.get(raw.id)!;
+                  sticker.merge(raw);
+                } else {
+                  sticker = new Sticker(this.client, raw);
+                }
+              }
+              stickers.push(sticker);
+            }
+            this.stickers.clear();
+            for (let sticker of stickers) {
+              this.stickers.set(sticker.id || sticker.name, sticker);
             }
           }
         }; return;
