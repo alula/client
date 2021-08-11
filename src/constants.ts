@@ -313,6 +313,7 @@ export enum ClientEvents {
   GUILD_ROLE_CREATE = 'guildRoleCreate',
   GUILD_ROLE_DELETE = 'guildRoleDelete',
   GUILD_ROLE_UPDATE = 'guildRoleUpdate',
+  GUILD_STICKERS_UPDATE = 'guildStickersUpdate',
   GUILD_UPDATE = 'guildUpdate',
   INTERACTION_CREATE = 'interactionCreate',
   INVITE_CREATE = 'inviteCreate',

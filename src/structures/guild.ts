@@ -55,6 +55,7 @@ import { Message } from './message';
 import { Presence } from './presence';
 import { Role } from './role';
 import { StageInstance } from './stageinstance';
+import { Sticker } from './sticker';
 import { User } from './user';
 import { VoiceRegion } from './voiceregion';
 import { VoiceState } from './voicestate';
@@ -686,6 +687,7 @@ export class Guild extends GuildPartial {
   rulesChannelId: null | string = null;
   splash: null | string = null;
   stageInstances: BaseCollection<string, StageInstance>;
+  stickers: BaseCollection<string, Sticker>;
   systemChannelFlags: number = 0;
   systemChannelId: null | string = null;
   unavailable: boolean = false;
@@ -702,11 +704,13 @@ export class Guild extends GuildPartial {
       this.members = new BaseCollection<string, Member>();
       this.roles = new BaseCollection<string, Role>();
       this.stageInstances = new BaseCollection<string, StageInstance>();
+      this.stickers = new BaseCollection<string, Sticker>();
     } else {
       this.emojis = new BaseCollection<string, Emoji>(this.client.emojis.options);
       this.members = new BaseCollection<string, Member>(this.client.members.options);
       this.roles = new BaseCollection<string, Role>(this.client.roles.options);
       this.stageInstances = new BaseCollection<string, StageInstance>(this.client.stageInstances.options);
+      this.stickers = new BaseCollection<string, Sticker>(this.client.stickers.options);
     }
     this.merge(data);
   }

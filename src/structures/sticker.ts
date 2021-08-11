@@ -9,6 +9,7 @@ import {
   BaseStructure,
   BaseStructureData,
 } from './basestructure';
+import { Guild } from './guild';
 
 
 const keysSticker = new BaseSet<string>([
@@ -32,6 +33,7 @@ export class Sticker extends BaseStructure {
   asset: string = '';
   description: string = '';
   formatType: StickerFormats = StickerFormats.UNKNOWN;
+  guildId?: string;
   id: string = '';
   name: string = '';
   packId: string = '';
@@ -68,6 +70,13 @@ export class Sticker extends BaseStructure {
         throw new Error(`Unexpected format type: ${this.formatType}`);
       };
     }
+  }
+  
+  get guild(): Guild | null {
+    if (this.guildId) {
+      return this.client.guilds.get(this.guildId) || null;
+    }
+    return null;
   }
 
   assetUrlFormat(format?: null | string, query?: UrlQuery): string {
