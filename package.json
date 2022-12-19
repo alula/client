@@ -6,7 +6,7 @@
   "dependencies": {
     "@types/node": "^14.17.2",
     "@types/node-fetch": "^2.5.10",
-    "detritus-client-rest": "^0.10.2",
+    "detritus-client-rest": "https://github.com/alula/client-rest#a939a22c56d99244d04fa5b1d6b2e02d346f15fb",
     "detritus-client-socket": "https://github.com/alula/client-socket#67b90f396ef57e129d851a3c401495dc894d6636",
     "detritus-utils": "^0.4.0"
   },
